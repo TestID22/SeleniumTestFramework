@@ -7,4 +7,4 @@ def driver():
     """Session-wide browser fixture."""
     driver = BrowserManager.get_driver(browser_name="chrome", headless=False)
     yield driver
-    BrowserManager.quit_driver()
+    BrowserManager.close_driver()
