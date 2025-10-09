@@ -1,0 +1,62 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment directories
+venv/
+env/
+.venv/
+ENV/
+
+# Test output files (e.g., coverage reports, logs)
+*.log
+*.coverage
+*.coveragerc
+nosetests.xml
+coverage.xml
+*.hypothesis/
+*.pytest_cache/
+*.tox/
+
+# Editor/IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Temporary files
+*.bak
+*.swp
+*.tmp
+*.orig
+
+# Build directories (if using build tools)
+build/
+dist/
+*.egg-info/
+
+# Pytest plugin files
+*.html
+*.json
+
+# CI/CD-related files (optional, based on the tool you're using)
+*.circleci/
+.gitlab-ci.yml
+*.github/
+
+# Python dependency lock files (if you're using pipenv or poetry, include these if you don't want to commit them)
+Pipfile.lock
+poetry.lock
+
+# Test data (if you generate large test data files during tests)
+test_data/
+
