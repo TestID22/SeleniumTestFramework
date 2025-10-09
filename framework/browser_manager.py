@@ -9,7 +9,9 @@ class BrowserManager:
     @classmethod
     def get_driver(cls, browser_name, headless=False) -> WebDriver:
         """
-        we use @classmethod because we want to call the same driver thgrou all drivers.
+        we use @classmethod because we want to call the same driver shared across all tests.
+        We want a single browser (singleton) shared across all tests.
+        _driver belongs to the class, not any specific instance.
         :return:
         """
         if cls._driver is None:
