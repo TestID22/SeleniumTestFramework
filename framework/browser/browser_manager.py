@@ -7,7 +7,7 @@ class BrowserManager:
     _driver = None
 
     @classmethod
-    def get_driver(cls, browser_name, headless=False) -> WebDriver:
+    def get_driver(cls, browser_name='chrome', headless=False) -> WebDriver:
         """
         we use @classmethod because we want to call the same driver shared across all tests.
         We want a single browser (singleton) shared across all tests.
