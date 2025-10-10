@@ -1,25 +1,16 @@
-import allure
-from framework.logger import AllureLogger
+from contextlib import ContextDecorator
 
-from framework.browser.browser_manager import BrowserManager
-
-logger = AllureLogger.get_test_logger(__name__)
-
-class TestStep:
-    def __init__(self, test_step_desctiption: str):
-        self.test_step_desctiption = test_step_desctiption
+class TestStep(ContextDecorator):
+    def __init__(self, name):
+        self.name = name
 
     def __enter__(self):
-        allure.dynamic.description(f"Step: {self.test_step_desctiption}")
-        logger.info(f"START: {self.test_step_desctiption}")
-        allure.step(self.test_step_desctiption)
-        return self
+        print(f"\nStart step: {self.name}")
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         if exc_type:
-            logger.error(f"FAILED: {self.test_step_desctiption} — {exc_val}")
-            BrowserManager.get_driver().save_screenshot(f"screens/{self.test_step_desctiption}.png")
+            print(f"Failed Step: {self.name} ")
+            print(f"Error: {exc_val}")
         else:
-            logger.info(f"PASSED: {self.test_step_desctiption}")
-        logger.info(f"END: {self.test_step_desctiption}")
+            print(f"PASSED STEP: {self.name}")
         return False
