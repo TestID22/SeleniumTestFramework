@@ -1,6 +1,6 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 
-from framework.browser_factory import BrowserFactory
+from framework.browser.browser_factory import BrowserFactory
 
 
 class BrowserManager:
@@ -23,3 +23,7 @@ class BrowserManager:
         if cls._driver:
             cls._driver.close()
             cls._driver = None
+
+    @classmethod
+    def set_test_environment(cls, url):
+        cls._driver.get(url)

@@ -2,5 +2,4 @@
 
 
 def test_google(driver):
-    driver.get("https://google.com")
-    assert driver.title == "Google"
+    assert driver.title == "Playground for the QA automation engineers"
