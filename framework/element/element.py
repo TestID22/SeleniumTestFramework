@@ -1,6 +1,7 @@
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.keys import Keys
 
 from framework.browser.browser_manager import BrowserManager
 
@@ -19,6 +20,9 @@ class Element:
     def locator(self):
         return self._locator
 
+    def as_tuple(self):
+        return self._locator, self._element_name, self._by
+
     def is_exist(self):
         self.wait.until(EC.url_to_be(self.PAGE_URL))
 
@@ -35,5 +39,8 @@ class Element:
         element.send_keys(key)
 
     def push_enter(self):
-        element = self.wait.until(EC.presence_of_element_located((self._by, self._locator)))
-        element.send_keys("Enter")
+        self.send_keys(Keys.ENTER)
+
+    def wait_for_visible(self, attempts: int = 3):
+        self.wait.until(EC.visibility_of_element_located((self._by, self._locator)))
+

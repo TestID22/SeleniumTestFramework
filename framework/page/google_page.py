@@ -3,23 +3,14 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from framework.page.base_page import BasePage
 from framework.element.element import Element
-
-
-
-class PageCategory:
-    """
-    Very important to be able to call all GooglePage properties we have created Category Class with page field
-    *set property has page and it is an object of GooglePage class, so we have possibility to call all googlepage methods
-    via page field.
-    """
-    def __init__(self, page):
-        self.page = page
+from framework.page.page_category import PageCategory
 
 
 class GooglePageElement:
 
     search_field = Element(locator="//textarea[@name='q']", element_name="search_field")
     submit_button = Element(locator="(//input[@type='submit' and @name='btnK'])[2]", element_name="click_button")
+    i_am_not_robot_check_box = Element(locator="//div[contains(@class, 'recaptcha-checkbox-border')]", element_name="i_am_not_robot_check_box")
 
 class GooglePage(BasePage):
 
@@ -54,5 +45,8 @@ class GooglePageClick(PageCategory):
     def click_submit_button(self):
         self.page.elements.submit_button.click()
 
-    def push_enter(self):
+    def push_enter(self, robot_check: bool = False):
         self.page.elements.submit_button.send_keys(Keys.ENTER)
+
+        if robot_check:
+            self.page.elements.i_am_not_robot_check_box.click()

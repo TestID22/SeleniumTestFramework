@@ -2,6 +2,7 @@ import time
 
 from framework.page.google_page import GooglePage
 from framework.page.main_page import MainPage
+from framework.page.tags_page import TagsPage
 from framework.utils.test_step import TestStep
 
 
@@ -22,17 +23,30 @@ def test_iframe_box_is_exist(driver):
 
 
 def test_search(driver):
+    """
+    this is a fake test there is nothing to test
+    """
     # page object
-    google_page = GooglePage()
+    main_page = MainPage()
+    tags_page = TagsPage()
+    expected_resolution = {'width': 1936, 'height': 1056}
+
     with TestStep("1. Open Google"):
-        driver.get("https://www.google.com")
+        driver.get("https://qaplayground.dev/apps/tags-input-box/")
 
     with TestStep("2. Fill in search query field"):
-        google_page.is_opened()
-        google_page.set.set_search("tets")
+        tags_page.is_opened()
+        tags_page.set.set_tag("test")
 
-    with TestStep("3. Click submit button"):
-        google_page.click.push_enter()
-        google_page.refresh_page()
+    with TestStep("3. Check the start url"):
+        tags_page.elements.tag_input_filed.push_enter()
+        tags_page.refresh_page()
+        assert tags_page.get_current_url() == "https://qaplayground.dev/apps/tags-input-box/", "Start url is incorrect"
+
+    with (TestStep("4. Check window size via staticmethod")):
+        actual_window_size = GooglePage.get_window_size()
+        assert ([actual_window_size['width'],actual_window_size['height']] == [expected_resolution['width'],
+                                                                               expected_resolution['height']],
+                                                                               "window size is incorrect")
 
     # todo: We need to add validation in real world example, but I won't do this.
