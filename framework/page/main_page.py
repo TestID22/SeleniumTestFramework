@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 
 from framework.browser.browser_manager import BrowserManager
 from framework.page.base_page import BasePage
@@ -22,15 +21,6 @@ class MainPage(BasePage):
     @property
     def click(self):
         return MainPageClick(self.driver)
-
-    def is_opened(self):
-        try:
-            self.wait.until(EC.presence_of_element_located((self.by, self.elements.iframe_box._locator)))
-        except TimeoutException:
-            print("Timed out")
-            return False
-        return True
-
 
 class MainPageElements:
 
