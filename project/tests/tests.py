@@ -22,7 +22,7 @@ def test_iframe_box_is_exist(driver):
         assert "iframe" in driver.current_url
 
 
-def test_search(driver):
+def test_tag_search(driver, config):
     """
     this is a fake test there is nothing to test
     """
@@ -41,7 +41,7 @@ def test_search(driver):
     with TestStep("3. Check the start url"):
         tags_page.elements.tag_input_filed.push_enter()
         tags_page.refresh_page()
-        assert tags_page.get_current_url() == "https://qaplayground.dev/apps/tags-input-box/", "Start url is incorrect"
+        assert tags_page.get_current_url() == config['tags_page'], "Start url is incorrect"
 
     with (TestStep("4. Check window size via staticmethod")):
         actual_window_size = GooglePage.get_window_size()
@@ -50,3 +50,17 @@ def test_search(driver):
                                                                                "window size is incorrect")
 
     # todo: We need to add validation in real world example, but I won't do this.
+def test_check_tags(driver, config):
+
+    tags_page = TagsPage()
+    expected_tags = ['node', 'javascript']
+    with TestStep("1. Open TagsPage"):
+        driver.get(config['tags_page'])
+
+    with TestStep("2. Fill in search query field"):
+        tags_page.is_opened()
+        tags_page.set.set_tag("test")
+        actual_tags_list = tags_page.get.get_tags_text()
+
+    with TestStep("3. Verify page URL contains 'tags'"):
+        assert expected_tags == actual_tags_list, "Lists are not equal/same"

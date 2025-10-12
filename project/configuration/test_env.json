@@ -1,3 +1,4 @@
 {
-  "test_environment_url": "https://qaplayground.dev/"
+  "test_environment_url": "https://qaplayground.dev/",
+  "tags_page": "https://qaplayground.dev/apps/tags-input-box/"
 }

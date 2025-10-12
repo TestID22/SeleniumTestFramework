@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException
 
 from framework.browser.browser_manager import BrowserManager
 
@@ -23,11 +24,16 @@ class Element:
     def as_tuple(self):
         return self._locator, self._element_name, self._by
 
-    def is_exist(self):
-        self.wait.until(EC.url_to_be(self.PAGE_URL))
-
     def find_element(self):
         return self.driver.find_element(self.by, self._locator)
+
+    def get_elements(self):
+        try:
+            return self.driver.find_elements(self._by, self._locator)
+        except NoSuchElementException as e:
+            print(f"Elements {_element_name} did not found")
+            print(f"Exception: {e}")
+            return []
 
     def click(self):
         self.wait.until(EC.presence_of_element_located((self._by, self._locator)))
@@ -44,3 +50,5 @@ class Element:
     def wait_for_visible(self, attempts: int = 3):
         self.wait.until(EC.visibility_of_element_located((self._by, self._locator)))
 
+    def get_elements_text(self):
+        return self.driver.find_element(self._by, self._locator).text
