@@ -29,7 +29,7 @@ class BasePage(ABC):
         return self.driver.execute_script(script, self.find_element())
 
     def screenshot(self, path):
-        self.find_element().screenshot(path)
+        self.driver.save_screenshot(path)
 
     def refresh_page(self):
         self.driver.refresh()
