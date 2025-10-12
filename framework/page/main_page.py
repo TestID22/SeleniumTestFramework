@@ -22,6 +22,7 @@ class MainPage(BasePage):
     def click(self):
         return MainPageClick(self.driver)
 
+
 class MainPageElements:
 
     iframe_box = (By.XPATH, "//img[@src='/img/iframe.png']")

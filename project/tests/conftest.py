@@ -11,7 +11,6 @@ def config():
 
 @pytest.fixture(scope="session")
 def driver(config):
-    """Session-wide browser fixture."""
     driver = BrowserManager.get_driver(browser_name="chrome", headless=False)
     test_url = config.get("test_environment_url")
     BrowserManager.set_test_environment(test_url)

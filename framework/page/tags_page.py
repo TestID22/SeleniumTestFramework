@@ -3,6 +3,7 @@ from framework.page.base_page import BasePage
 
 from framework.page.page_category import PageCategory
 
+
 class TagsPageElements:
 
     tag_window = Element(locator="//div[contains(@class, 'light-theme wrapper')]", element_name="tag_window")

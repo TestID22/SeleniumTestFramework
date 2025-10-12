@@ -12,6 +12,7 @@ class GooglePageElement:
     submit_button = Element(locator="(//input[@type='submit' and @name='btnK'])[2]", element_name="click_button")
     i_am_not_robot_check_box = Element(locator="//div[contains(@class, 'recaptcha-checkbox-border')]", element_name="i_am_not_robot_check_box")
 
+
 class GooglePage(BasePage):
 
     def __init__(self):
