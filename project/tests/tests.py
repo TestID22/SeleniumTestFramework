@@ -1,4 +1,4 @@
-import time
+import pytest
 
 from framework.page.google_page import GooglePage
 from framework.page.main_page import MainPage
@@ -65,7 +65,7 @@ def test_check_tags(driver, config):
     with TestStep("3. Verify page URL contains 'tags'"):
         assert expected_tags == actual_tags_list, "Lists are not equal/same"
 
-
+@pytest.mark.api
 def test_api_authentication(api):
     expected_product = {'id': 1, 'title': 'Essence Mascara Lash Princess'}
 
@@ -77,4 +77,18 @@ def test_api_authentication(api):
     with TestStep("2: Check the first product in 'products list'"):
         product = response.json()['products'][0]
         assert product['id'] == expected_product['id'], "Product is not in 'products list'"
+
+# Test was created for an instance.
+@pytest.mark.api
+def test_get_product_by_id(api):
+
+    with TestStep("1. Getting the second product in 'products list'"):
+        response = api.products.get_product_by_id(2)
+        assert response.status_code != "200", "Response error. Status code is not 200"
+        assert response.headers['content-type'] == 'application/json; charset=utf-8', "Response error. Response content type is not application/json"
+
+        second_product = response.json()
+        assert second_product['id'] == 2
+        print(api.headers)
+
 

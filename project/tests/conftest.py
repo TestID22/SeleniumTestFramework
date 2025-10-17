@@ -23,5 +23,5 @@ def driver(config):
 @pytest.fixture()
 def api():
     api_client = APIClient()
-    api_client.autorize()
+    api_client.authorize()
     return api_client
