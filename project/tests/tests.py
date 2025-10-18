@@ -92,3 +92,13 @@ def test_get_product_by_id(api):
         print(api.headers)
 
 
+@pytest.mark.api
+def test_create_product(api):
+
+    with TestStep("1. Create a new product"):
+        response = api.products.create_product({'title': 'bmw'})
+        assert response.status_code != "201", "Product was not created successfully"
+        print(response.json())
+        """
+        In real world we must to check if all key-values pairs are created. Check JSON schema. But it's a mock case
+        """
